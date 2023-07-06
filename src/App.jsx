@@ -3,15 +3,15 @@ import Splash from "./components/splash";
 import Quiz from "./components/quix";
 
 function App() {
-  const [isDivVisible, setIsDivVisible] = useState(false);
+  const [isQuizVisible, setIsQuizVisible] = useState(false);
 
   const handleButtonClick = () => {
-    setIsDivVisible(true);
+    setIsQuizVisible(true);
   };
 
   return (
     <main>
-      {isDivVisible ? <Quiz /> : <Splash onButtonClick={handleButtonClick} />}
+      {isQuizVisible ? <Quiz /> : <Splash onButtonClick={handleButtonClick} />}
     </main>
   );
 }
