@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Splash from "./components/splash";
-import Quiz from "./components/quix";
+import Quiz from "./components/quiz";
 
 function App() {
   const [isQuizVisible, setIsQuizVisible] = useState(false);

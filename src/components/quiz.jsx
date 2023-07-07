@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import shuffleArray from "shuffle-array";
+import {decode} from 'html-entities';
 
 export default function Quiz() {
 
@@ -14,7 +15,7 @@ export default function Quiz() {
         .then((res) => res.json())
         .then((data) => {
             const newQs = data.results.map (question => ({
-                question: question.question,
+                question: decode(question.question),
                 answers: shuffleArray(question.incorrect_answers.concat(question.correct_answer)),
                 correct: question.correct_answer,
             }))
@@ -37,6 +38,7 @@ export default function Quiz() {
         setQuizC((prevQuizC => prevQuizC + score))
         console.log(quizC)
     }
+
     return (
         <div className="quizBody">
             {quizQs.map((item, index) => (
@@ -44,6 +46,7 @@ export default function Quiz() {
           <h2 className="questionLine">{item.question}</h2>
           <div className="quizMain">
                 {item.answers.map((answer, answerIndex) => (
+        
                     <label key={answerIndex}>
                         <input
                             type="radio"
@@ -58,8 +61,8 @@ export default function Quiz() {
           </div>
         </div>
       ))}
-      <button onClick={() => handleSubmit()}>Submit</button>
-      {quizDone ? <div>Your Score is {quizC}</div> : null}
+      {quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Submit</button>}
+      {quizDone ? <div className="scoreQuiz">Your Score is {quizC}</div> : null}
         </div>
     )
 }

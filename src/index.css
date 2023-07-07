@@ -76,3 +76,15 @@ main {
   text-align: center;
   height: 80vh;
 }
+
+.regularBox {
+  background-color: aliceblue;
+}
+
+.correctBox {
+  background-color: rgb(101, 235, 112);
+}
+
+.incorrectBox {
+  background-color: rgb(216, 48, 48);
+}
