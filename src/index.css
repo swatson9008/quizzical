@@ -74,7 +74,7 @@ main {
   align-items: center;
   padding: 20px;
   text-align: center;
-  height: 80vh;
+  height: 100vh;
 }
 
 .regularBox {
@@ -83,6 +83,10 @@ main {
 
 .correctBox {
   background-color: rgb(101, 235, 112);
+}
+
+.correctedBox {
+  background-color: rgb(162, 253, 247);
 }
 
 .incorrectBox {

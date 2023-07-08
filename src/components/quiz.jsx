@@ -28,7 +28,25 @@ export default function Quiz() {
         const updatedQs = [... quizQs];
         updatedQs[questionIndex].selectedAnswer = answer;
         setQuizQs(updatedQs);
+        console.log(quizQs[questionIndex].correct)
+        console.log(answer)
     }
+    const answerClass = (answer, item) => {
+        console.log(item.selectedAnswer)
+        if (!quizDone) {
+          return "regularBox";
+        } else if (answer === item.correct && item.correct === item.selectedAnswer) {
+          return "correctBox";
+        } else if (answer !== item.correct && answer === item.selectedAnswer) {
+          return "incorrectBox";
+        } else if (answer === item.correct && item.correct != item.selectedAnswer){
+            return "correctedBox"
+        }
+        else {
+          return "regularBox";
+        }
+      };
+    
     const handleSubmit = () => {
         setQuizDone(true);
         let score = 0;
@@ -38,6 +56,7 @@ export default function Quiz() {
         setQuizC((prevQuizC => prevQuizC + score))
         console.log(quizC)
     }
+
 
     return (
         <div className="quizBody">
@@ -55,7 +74,7 @@ export default function Quiz() {
                             checked={item.selectedAnswer === answer}
                             onChange={() => handleAnswerChange(index, answer)}
                             />
-                            {answer} 
+                            <span className={answerClass(answer, item)}>{answer}</span>
                     </label>
                 ))}
           </div>
