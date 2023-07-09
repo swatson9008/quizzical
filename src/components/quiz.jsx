@@ -21,12 +21,12 @@ export default function Quiz() {
       }, []);
 
     const fetchQuizQuestions = () => {
-        fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
+        fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
           .then((res) => res.json())
           .then((data) => {
             const newQs = data.results.map((question) => ({
               question: decode(question.question),
-              answers: shuffleArray(question.incorrect_answers.concat(question.correct_answer)),
+              answers: decode(shuffleArray(question.incorrect_answers.concat(question.correct_answer))),
               correct: question.correct_answer,
             }));
             setQuizQs(newQs);
