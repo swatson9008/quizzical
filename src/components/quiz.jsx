@@ -10,19 +10,31 @@ export default function Quiz() {
 
     const [quizC, setQuizC] = useState(0);
 
-    useEffect(function(){
+    const [disable, setDisable] = useState(false);
+
+    const initialQuizQs = [];
+
+    const initialQuizC = 0;
+
+    useEffect(() => {
+        fetchQuizQuestions();
+      }, []);
+
+    const fetchQuizQuestions = () => {
         fetch("https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple")
-        .then((res) => res.json())
-        .then((data) => {
-            const newQs = data.results.map (question => ({
-                question: decode(question.question),
-                answers: shuffleArray(question.incorrect_answers.concat(question.correct_answer)),
-                correct: question.correct_answer,
-            }))
-            setQuizQs(newQs)
-        })
-    }, []);
-    console.log(quizQs);
+          .then((res) => res.json())
+          .then((data) => {
+            const newQs = data.results.map((question) => ({
+              question: decode(question.question),
+              answers: shuffleArray(question.incorrect_answers.concat(question.correct_answer)),
+              correct: question.correct_answer,
+            }));
+            setQuizQs(newQs);
+          })
+          .catch((error) => {
+            console.log("Error fetching quiz questions:", error);
+          });
+      };
 
     const handleAnswerChange = (questionIndex, answer) => {
         const updatedQs = [... quizQs];
@@ -49,6 +61,7 @@ export default function Quiz() {
     
     const handleSubmit = () => {
         setQuizDone(true);
+        setDisable(true);
         let score = 0;
         quizQs.forEach((question) => {
             if (question.selectedAnswer === question.correct){score++}
@@ -56,6 +69,14 @@ export default function Quiz() {
         setQuizC((prevQuizC => prevQuizC + score))
         console.log(quizC)
     }
+
+    const handleReset = () => {
+        setQuizQs(initialQuizQs);
+        setQuizDone(false);
+        setQuizC(initialQuizC);
+        setDisable(false);
+        fetchQuizQuestions();
+      };
 
 
     return (
@@ -74,14 +95,15 @@ export default function Quiz() {
                             checked={item.selectedAnswer === answer}
                             onChange={() => handleAnswerChange(index, answer)}
                             />
-                            <span className={answerClass(answer, item)}>{answer}</span>
+                            <span disabled={disable} className={answerClass(answer, item)}>{answer}</span>
                     </label>
                 ))}
           </div>
         </div>
       ))}
-      {quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Submit</button>}
+      {quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Check Answers</button>}
       {quizDone ? <div className="scoreQuiz">Your Score is {quizC}</div> : null}
+      {quizDone ? <button className="againButton" onClick={handleReset}>Try Again</button> : null}
         </div>
     )
 }
