@@ -26,7 +26,8 @@ a:hover {
 body {
   background-color: antiquewhite;
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
 
 }
 
@@ -74,7 +75,6 @@ main {
   align-items: center;
   padding: 20px;
   text-align: center;
-  height: 100vh;
 }
 
 .regularBox {
