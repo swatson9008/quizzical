@@ -26,7 +26,9 @@ export default function Quiz() {
           .then((data) => {
             const newQs = data.results.map((question) => ({
               question: decode(question.question),
-              answers: shuffleArray(question.incorrect_answers.concat(question.correct_answer)),
+              answers: shuffleArray(
+                question.incorrect_answers.concat(question.correct_answer)
+              ).map((answer) => decode(answer)),
               correct: question.correct_answer,
             }));
             setQuizQs(newQs);
