@@ -162,6 +162,7 @@ span {
   margin-left: 4px;
   margin-right: 4px;
   padding: 4px;
+  margin-bottom: 20px;
 }
 
 .quizMain input[type="radio"]:checked + span {
@@ -188,4 +189,8 @@ span {
 
 .againButton {
   margin-top: 10px;
+}
+
+hr {
+  //margin-top: 40px;
 }

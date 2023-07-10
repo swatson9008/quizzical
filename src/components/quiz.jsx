@@ -102,6 +102,7 @@ export default function Quiz() {
                     </label>
                 ))}
           </div>
+          {index !== quizQs.length - 1 && <hr />}
         </div>
       ))}
       <div className="quizBottom">{quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Check Answers</button>}
