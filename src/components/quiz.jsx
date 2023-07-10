@@ -98,14 +98,15 @@ export default function Quiz() {
                             onChange={() => handleAnswerChange(index, answer)}
                             />
                             <span disabled={disable} className={answerClass(answer, item)}>{answer}</span>
+                            
                     </label>
                 ))}
           </div>
         </div>
       ))}
-      {quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Check Answers</button>}
-      {quizDone ? <div className="scoreQuiz">Your Score is {quizC}</div> : null}
-      {quizDone ? <button className="againButton" onClick={handleReset}>Try Again</button> : null}
+      <div className="quizBottom">{quizDone ? "" : <button className="submitQuiz" onClick={() => handleSubmit()}>Check Answers</button>}
+      {quizDone ? <div className="scoreQuiz">Your Score is {quizC} out of 5!</div> : null}
+      {quizDone ? <button className="againButton" onClick={handleReset}>Try Again</button> : null}</div>
         </div>
     )
 }
